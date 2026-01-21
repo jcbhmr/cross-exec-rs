@@ -8,6 +8,7 @@ homepage = "https://docs.rs/cross-exec"
 repository = "https://github.com/jcbhmr/cross-exec-rs"
 keywords = ["exec"]
 categories = []
+exclude = [".github", ".devcontainer", ".vscode"]
 
 [target.'cfg(windows)'.dependencies]
 windows = "0.62.2"
