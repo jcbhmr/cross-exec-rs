@@ -1,4 +1,4 @@
-# Cross-platform `.exec()` for Rust
+# `.cross_exec()` for Rust
 
 ⚡️ Isomorphic `CommandExt::exec` for Unix and Windows
 
@@ -14,7 +14,7 @@ use std::error::Error;
 fn main() -> Result<(), Box<dyn Error>> {
     Command::new("cargo")
         .arg("--version")
-        .exec()?;
+        .cross_exec()?;
 }
 ```
 

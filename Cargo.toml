@@ -1,0 +1,7 @@
+[package]
+name = "cross-command-exec"
+version = "0.1.0"
+edition = "2024"
+
+[target.'cfg(windows)'.dependencies]
+windows = "0.62.2"
