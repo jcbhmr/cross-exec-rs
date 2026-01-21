@@ -9,7 +9,7 @@ pub trait CommandExt {
     ///
     /// On Windows, this will:
     ///
-    /// 1. Set a `Ctrl+C` handler that ignores all `Ctrl+C` events and lets the child process handle them.
+    /// 1. Set a `Ctrl+C` and friends handler that lets the child process handle them.
     /// 2. Run the command with [`Command::status`]. If it fails to start, return the error.
     /// 3. Call [`process::exit`] with the exit code of the child process.
     ///
@@ -40,7 +40,7 @@ impl CommandExt for Command {
             use std::os::windows::process::CommandExt;
             use windows::{Win32::System::Console::SetConsoleCtrlHandler, core::BOOL};
 
-            // Ignore Ctrl+C in this process so that the child process can handle it.
+            // Ignore Ctrl+C and friends so that the child process can handle them.
             unsafe extern "system" fn ignore_all(_: u32) -> BOOL {
                 true.into()
             }
@@ -70,17 +70,17 @@ mod tests {
     use std::error::Error;
 
     #[test]
-    fn test_example_cargo_version() -> Result<(), Box<dyn Error>> {
+    fn test_example_cargo_wrapper() -> Result<(), Box<dyn Error>> {
         let expected = {
             let output = Command::new("cargo").arg("--version").output()?;
-            let stdout = String::from_utf8(output.stdout)?;
+            let stdout = String::from_utf8(output.stdout)?.replace("\r\n", "\n");
             format!("Hello from before cross_exec!\n{}", stdout)
         };
         let actual = {
             let output = Command::new("cargo")
-                .args(&["run", "--example", "cargo-version"])
+                .args(&["run", "--example", "cargo-wrapper", "--", "--version"])
                 .output()?;
-            String::from_utf8(output.stdout)?
+            String::from_utf8(output.stdout)?.replace("\r\n", "\n")
         };
         assert_eq!(expected, actual);
         Ok(())
