@@ -3,7 +3,20 @@ use std::{
     process::{self, Command},
 };
 
-pub trait CommandExt {
+
+/// This trait being unreachable from outside the crate
+/// prevents outside implementations of our extension traits.
+/// This allows adding more trait methods in the future.
+pub(crate) trait Sealed {}
+
+/// Allows extension traits within this crate.
+impl Sealed for Command {}
+
+/// Extensions to the [`process::Command`] builder.
+///
+/// This trait is sealed: it cannot be implemented outside `cross_exec`. This is so that future additional methods are not breaking changes.
+#[allow(private_bounds)]
+pub trait CommandExt: Sealed {
     ///
     /// On Unix, this will call [`std::os::unix::process::CommandExt::exec`].
     ///
