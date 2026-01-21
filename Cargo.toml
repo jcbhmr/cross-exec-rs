@@ -2,6 +2,12 @@
 name = "cross-exec"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "⚡️ Unix CommandExt::exec but isomorphic"
+homepage = "https://docs.rs/cross-exec"
+repository = "https://github.com/jcbhmr/cross-exec-rs"
+keywords = ["exec"]
+categories = []
 
 [target.'cfg(windows)'.dependencies]
 windows = "0.62.2"
