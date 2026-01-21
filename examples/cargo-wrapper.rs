@@ -1,4 +1,4 @@
-use cross_command_exec::CommandExt;
+use cross_exec::CommandExt;
 use std::{env, error::Error, process::Command};
 
 fn main() -> Result<(), Box<dyn Error>> {

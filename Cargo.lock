@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "cross-command-exec"
+name = "cross-exec"
 version = "0.1.0"
 dependencies = [
  "windows",
