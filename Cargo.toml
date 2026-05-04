@@ -11,4 +11,4 @@ categories = []
 exclude = [".github", ".devcontainer", ".vscode"]
 
 [target.'cfg(windows)'.dependencies]
-windows = "0.62.2"
+windows = { version = "0.62.2", features = ["Win32_System_Console"] }
